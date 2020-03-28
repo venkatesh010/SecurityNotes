@@ -69,3 +69,42 @@ So with SSL and SSL Certificates we achieved:
 2) Encryption of messages by a key which is only known to two mutual parties
 
 Links -->  https://medium.com/@User3141592/what-is-ssl-and-how-does-it-work-a5465d19b494
+
+
+
+Theory
+Make sure you understand basic things like
+session and cookie (starbucks analogy and also they make http stateful)
+digital sign (used to validate message is tampered or not) 
+ssl and handshakes (tunnel, basically for protected  transfer of data)
+
+Session based authentication which uses a session id created by server and sent to the client browser as a cookie 
+is almost same as
+JWT token based authentication where token created by server is passed to client browser
+only difference is 
+jwt stores info about user and cookie just stores a id on client side which is used to get user info when request reaches server side 
+
+when a session id is stolen or a jwt token is stolen 
+its worse, because attaker can act as a valid user and its equivalent to hacking username and password
+
+articles on stolen scenario:
+https://searchsecurity.techtarget.com/tip/How-to-secure-session-tokens?amp=1
+https://developer.okta.com/blog/2018/06/20/what-happens-if-your-jwt-is-stolen
+https://www.freecodecamp.org/news/session-hijacking-and-how-to-stop-it-711e3683d1ac/amp/
+
+
+if you protect client and server communication using ssl
+the only window remains is client side attacks like xss session hijacking or fixation or csrf
+which can be taken care by standard measures 
+like using httponly and secure cookie and csrf token etc.
+
+and jwt tokens cant be tampered as they are signed, similar can be done with traditional cookies
+
+Now coming up to the discussion of 2waytls mutual auth v/s oauth jwt authentication
+Honestly Oauth was developed for a 3-legged authentication like a 3rd party login allowment without sharing the password (eg. allow to access gmail data), but if youre using 2-legged oauth which is only for its token capability then its equivalent to 2waytls auth
+
+only catch is if the api resources or the backend youre trying to protect has different access levels then the backend need either different certs for it or simple way of doing it is using oauth jwt to propagate user permissions in jwt token to backend to validage
+
+Articles :
+https://stackoverflow.com/questions/29636715/oauth-2-0-two-legged-authentication-vs-ssl-tls
+https://security.stackexchange.com/questions/128185/jwt-vs-client-certificates
