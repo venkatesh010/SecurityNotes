@@ -72,7 +72,7 @@ Links -->  https://medium.com/@User3141592/what-is-ssl-and-how-does-it-work-a546
 
 
 
-Theory
+# Theory (2WAYTLS vs Token auth):
 Make sure you understand basic things like
 session and cookie (starbucks analogy and also they make http stateful)
 digital sign (used to validate message is tampered or not) 
